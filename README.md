@@ -1,150 +1,110 @@
-# OpenClaw AkShare Skill
+# OpenClaw AkShare 技能
 
-Chinese financial data access using AkShare library for OpenClaw.
+通过 [AkShare](https://akshare.akfamily.xyz/) 获取中国金融市场数据的 OpenClaw 技能。
 
-## Overview
+## 功能概览
 
-This skill provides easy access to Chinese financial market data through the [AkShare](https://akshare.akfamily.xyz/) library. It supports real-time and historical data for:
+本技能支持以下实时与历史数据：
 
-- **A-shares (A股)**: Shanghai and Shenzhen stock exchanges
-- **Hong Kong stocks (港股)**: HKEX
-- **US stocks (美股)**: US market data
-- **Futures (期货)**: Commodity and index futures
-- **Funds (基金)**: Open-end and ETF funds
-- **Macroeconomic indicators (宏观)**: GDP, CPI, PMI, and more
+- A 股：上海、深圳和北京证券交易所行情
+- 港股：香港交易所行情
+- 美股：美国市场行情
+- 期货：商品期货和股指期货
+- 基金：开放式基金和 ETF
+- 宏观经济指标：国内生产总值、居民消费价格指数、采购经理指数等
 
-## Installation
+## 安装
 
-### Prerequisites
+### 环境要求
 
-- Python 3.7+
-- OpenClaw framework
+- Python 3.7 或更高版本
+- OpenClaw 框架
 
-### Install AkShare
+### 安装 AkShare
 
 ```bash
 pip install akshare
 ```
 
-Or use the provided installation script:
+也可以运行仓库中的安装脚本：
 
 ```bash
 bash scripts/install_akshare.sh
 ```
 
-### Install the Skill
+### 安装技能
 
-Copy this skill to your OpenClaw workspace:
+将本仓库复制到 OpenClaw 工作区的技能目录：
 
 ```bash
 cp -r openclaw-akshare-skill /path/to/openclaw/workspace/skills/akshare
 ```
 
-## Quick Start
+## 快速开始
 
-### Basic Stock Quote
+### 获取 A 股实时行情
 
 ```python
 import akshare as ak
 
-# Get all A-shares real-time data
+# 获取全部 A 股实时行情
 df = ak.stock_zh_a_spot_em()
 print(df.head())
 ```
 
-### Historical Stock Data
+### 获取股票历史行情
 
 ```python
-# Get historical daily data for a specific stock
+# 获取指定股票的日线历史行情
 df = ak.stock_zh_a_hist(
     symbol="000001",
     period="daily",
     start_date="20240101",
     end_date="20241231",
-    adjust="qfq"  # Forward adjustment
+    adjust="qfq",  # 前复权
 )
 print(df.tail())
 ```
 
-## Features
+## 主要能力
 
-### Stock Data
+- 股票：A 股、港股、美股实时行情，以及日线、周线、月线历史行情
+- 期货：商品期货实时行情和主要交易所历史行情
+- 基金：开放式基金信息和历史净值走势
+- 宏观经济：国内生产总值、居民消费价格指数、工业生产者出厂价格指数、采购经理指数等
 
-- **Real-time quotes**: All A-shares, Hong Kong stocks, US stocks
-- **Historical data**: Daily, weekly, monthly periods with price adjustment
-- **Stock list**: Complete stock code and name information
+## 常用参数
 
-### Futures Data
+周期：`daily` 表示日线，`weekly` 表示周线，`monthly` 表示月线。
 
-- Commodity futures real-time data
-- Historical futures data from major exchanges
+复权方式：`qfq` 表示前复权，`hfq` 表示后复权，`""` 表示不复权。
 
-### Fund Data
+## 示例与文档
 
-- Open-end fund information
-- Fund historical net value trends
+- `scripts/example_usage.py`：常用场景示例
+- `scripts/test_basic.py`：基础功能测试
+- `scripts/test_quick.py`：快速结构测试
+- [技能说明](SKILL.md)
+- [AkShare API 参考](references/akshare_api.md)
+- [常用函数](references/common_functions.md)
+- [AkShare 官方文档](https://akshare.akfamily.xyz/)
 
-### Macroeconomic Indicators
+## 使用建议
 
-- GDP, CPI, PPI, PMI
-- Economic calendar and indicators
+1. AkShare 默认不缓存数据；需要时自行实现缓存。
+2. 控制请求频率，避免触发数据源限流。
+3. 接口通常返回 pandas `DataFrame`，便于进一步处理。
+4. 网络或上游数据源可能异常，应增加必要的重试和错误处理。
 
-## Common Parameters
+## 许可证
 
-### Period (周期)
+本项目采用 MIT 许可证，详情见 [LICENSE](LICENSE)。许可证原文依法保留英文。
 
-- `daily` - Daily (日线)
-- `weekly` - Weekly (周线)
-- `monthly` - Monthly (月线)
+## 参与贡献
 
-### Price Adjustment (复权)
+欢迎提交贡献，具体要求见 [CONTRIBUTING.md](CONTRIBUTING.md)。版本历史见 [CHANGELOG.md](CHANGELOG.md)。
 
-- `qfq` - Forward adjustment (前复权)
-- `hfq` - Backward adjustment (后复权)
-- `""` - No adjustment (不复权)
+## 致谢
 
-## Examples
-
-See the `scripts/` directory for more examples:
-
-- `example_usage.py` - Common usage examples
-- `test_basic.py` - Basic functionality tests
-- `test_quick.py` - Quick start examples
-
-## Documentation
-
-- [SKILL.md](SKILL.md) - Complete skill documentation
-- [references/akshare_api.md](references/akshare_api.md) - Detailed API reference
-- [references/common_functions.md](references/common_functions.md) - Commonly used functions
-- [Official AkShare Docs](https://akshare.akfamily.xyz/)
-
-## Tips
-
-1. **Data caching**: AkShare doesn't cache data by default. Implement your own caching if needed
-2. **Rate limiting**: Be mindful of request frequency to avoid being blocked
-3. **Data format**: Returns pandas DataFrame, can be easily processed
-4. **Error handling**: Network errors may occur, implement retry logic
-
-## License
-
-MIT License - see [LICENSE](LICENSE) file for details
-
-## Contributing
-
-Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-## Changelog
-
-See [CHANGELOG.md](CHANGELOG.md) for version history.
-
-## Acknowledgments
-
-- [AkShare](https://akshare.akfamily.xyz/) - The underlying Python library for Chinese financial data
-- [OpenClaw](https://github.com/openclaw/openclaw) - The AI assistant framework
-
-## Support
-
-For issues and questions:
-- Open an issue on GitHub
-- Check [AkShare documentation](https://akshare.akfamily.xyz/)
-- Review the examples in the `scripts/` directory
+- [AkShare](https://akshare.akfamily.xyz/)：底层中国金融数据接口库
+- [OpenClaw](https://github.com/openclaw/openclaw)：AI 助手框架

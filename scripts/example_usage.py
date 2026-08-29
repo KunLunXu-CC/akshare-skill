@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-AkShare Tool 使用示例
+AkShare 工具使用示例
 演示如何使用 akshare_tool.py 中的功能
 """
 
@@ -270,7 +270,7 @@ def example_data_analysis():
 def main():
     """运行所有示例"""
     print("\n" + "="*80)
-    print("AkShare Tool 使用示例")
+    print("AkShare 工具使用示例")
     print("="*80)
     
     examples = [
@@ -291,7 +291,7 @@ def main():
         print(f"  {i}. {name}")
     
     print("\n运行所有示例可能需要较长时间，请耐心等待...")
-    input("\n按Enter键开始运行所有示例，或Ctrl+C取消...")
+    input("\n按回车键开始运行所有示例，或按 Ctrl+C 取消...")
     
     try:
         for name, func in examples:

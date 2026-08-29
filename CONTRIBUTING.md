@@ -1,146 +1,75 @@
-# Contributing to OpenClaw AkShare Skill
+# 为 OpenClaw AkShare 技能贡献代码
 
-Thank you for your interest in contributing to the OpenClaw AkShare Skill!
+感谢你参与 OpenClaw AkShare 技能的开发。
 
-## How to Contribute
+## 贡献方式
 
-### Reporting Bugs
+### 报告缺陷
 
-Before creating bug reports, please check the existing issues as you might find that the problem has already been reported. When creating a bug report, please include:
+提交缺陷前，请先搜索现有问题。缺陷报告应包含清晰的标题、问题说明、复现步骤、预期行为、实际行为，以及 Python、AkShare 和操作系统版本。
 
-- **Title**: Clear and descriptive
-- **Description**: Detailed explanation of the problem
-- **Steps to reproduce**: Code snippets or commands
-- **Expected behavior**: What you expected to happen
-- **Actual behavior**: What actually happened
-- **Environment**: Python version, AkShare version, OS
+### 建议改进
 
-### Suggesting Enhancements
+请使用明确的标题，详细描述建议内容、实际价值和适用示例。
 
-Enhancement suggestions are welcome! Please:
+### 提交合并请求
 
-- Use a clear and descriptive title
-- Provide a detailed description of the suggested enhancement
-- Explain why this enhancement would be useful
-- Provide examples if applicable
+1. 派生本仓库。
+2. 创建功能分支：`git checkout -b feature/amazing-feature`。
+3. 提交修改：`git commit -m 'feat: 增加某项功能'`。
+4. 推送分支：`git push origin feature/amazing-feature`。
+5. 创建合并请求。
 
-### Pull Requests
+## 代码规范
 
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add some amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
+- Python 代码遵循 PEP 8。
+- 使用含义明确的变量名和函数名。
+- 为函数和类添加中文文档字符串。
+- 保持函数职责单一、实现简洁。
+- 为复杂逻辑添加中文注释。
+- 代码标识符、第三方 API、协议字段等为保证兼容性可以保留英文。
 
-### Code Style
+## 语言规范
 
-- Follow PEP 8 for Python code
-- Use meaningful variable and function names
-- Add docstrings to functions and classes
-- Keep functions focused and concise
-- Add comments for complex logic
+后续开发中的说明性内容统一使用简体中文，包括代码注释、文档字符串、用户可见文案、项目文档、测试说明、提交信息和评审说明。详细规则见 [Agent.md](Agent.md)。
 
-### Documentation
+## 文档与测试
 
-- Update relevant documentation when adding features
-- Keep examples up-to-date
-- Use clear, concise language
-- Include code snippets where helpful
+- 新增功能时同步更新相关文档和测试。
+- 保持示例与当前实现一致。
+- 使用清晰、简洁的中文。
+- 提交前确保现有测试全部通过。
+- 条件允许时覆盖多个 Python 版本。
 
-### Testing
+## 开发环境
 
-- Add tests for new features
-- Ensure all tests pass before submitting PR
-- Test on multiple Python versions if possible
-- Include test data when appropriate
-
-## Development Setup
-
-1. Clone the repository:
 ```bash
 git clone https://github.com/your-username/openclaw-akshare-skill.git
 cd openclaw-akshare-skill
-```
-
-2. Create a virtual environment:
-```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt  # if available
+source venv/bin/activate  # Windows：venv\Scripts\activate
 pip install akshare
-```
-
-4. Run tests:
-```bash
-python scripts/test_basic.py
 python scripts/test_quick.py
 ```
 
-## Project Structure
+## 项目结构
 
-```
+```text
 openclaw-akshare-skill/
-├── SKILL.md              # Main skill documentation
-├── README.md             # Project README
-├── LICENSE               # MIT License
-├── .gitignore           # Git ignore rules
-├── CHANGELOG.md         # Version history
-├── CONTRIBUTING.md      # Contribution guidelines
-├── references/          # Reference documentation
-│   ├── akshare_api.md
-│   └── common_functions.md
-└── scripts/             # Example scripts and tests
-    ├── example_usage.py
-    ├── test_basic.py
-    ├── test_quick.py
-    ├── akshare_tool.py
-    └── install_akshare.sh
+├── SKILL.md              # 技能主说明
+├── README.md             # 项目说明
+├── Agent.md              # 仓库语言规范
+├── LICENSE               # MIT 许可证
+├── CHANGELOG.md          # 版本记录
+├── CONTRIBUTING.md       # 贡献指南
+├── references/           # 参考资料
+└── scripts/              # 工具、示例和测试
 ```
 
-## Guidelines
+## 分支与版本
 
-### Commit Messages
+推荐使用 `feature/`、`fix/`、`docs/`、`test/` 和 `refactor/` 分支前缀。项目版本号遵循语义化版本规范。
 
-Use clear, descriptive commit messages:
-```
-feat: add support for stock options
-fix: correct date format in historical data
-docs: update API reference
-test: add tests for futures data
-```
+## 行为准则
 
-### Branch Naming
-
-- `feature/` - New features
-- `fix/` - Bug fixes
-- `docs/` - Documentation updates
-- `test/` - Test additions or changes
-- `refactor/` - Code refactoring
-
-### Versioning
-
-This project follows Semantic Versioning:
-- **MAJOR**: Incompatible API changes
-- **MINOR**: Backwards-compatible functionality
-- **PATCH**: Backwards-compatible bug fixes
-
-## Questions?
-
-If you have questions about contributing, feel free to:
-- Open an issue with the `question` label
-- Contact maintainers via GitHub discussions
-- Check existing documentation first
-
-## Code of Conduct
-
-Be respectful and professional:
-- Treat others with respect
-- Welcome newcomers and help them learn
-- Focus on constructive feedback
-- Be inclusive and welcoming to all contributors
-
-Thank you for contributing!
+尊重所有参与者，欢迎并帮助新贡献者，提供具体、建设性的反馈，并保持包容、专业的协作环境。

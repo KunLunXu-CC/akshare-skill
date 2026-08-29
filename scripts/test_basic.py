@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-AkShare Tool 基本功能测试
+AkShare 工具基本功能测试
 验证核心功能是否正常工作
 """
 
@@ -123,7 +123,7 @@ def test_retry_mechanism():
 def run_all_tests():
     """运行所有测试"""
     print("="*80)
-    print("AkShare Tool 基本功能测试")
+    print("AkShare 工具基本功能测试")
     print("="*80)
     
     tests = [

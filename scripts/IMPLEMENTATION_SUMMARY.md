@@ -1,8 +1,8 @@
-# AkShare Skill 实现总结
+# AkShare 技能实现总结
 
 ## 项目概述
 
-已成功为 AkShare skill 添加完整的 Python 代码实现，创建了一个功能强大的命令行工具用于获取中国金融市场数据。
+已成功为 AkShare 技能添加完整的 Python 代码实现，创建了一个功能强大的命令行工具，用于获取中国金融市场数据。
 
 ## 完成的工作
 
@@ -164,7 +164,7 @@ python3 akshare_tool.py stock-realtime --output data.csv
 python3 akshare_tool.py stock-history --symbol 000001 --start-date 20240101 --end-date 20241231
 ```
 
-### 6. Python API 使用
+### 6. Python 接口使用
 
 ```python
 from akshare_tool import AkShareTool
@@ -236,8 +236,8 @@ pip install akshare pandas pyarrow
 
 ### 10. 代码质量
 
-- ✅ 完整的类型提示（Type Hints）
-- ✅ 详细的文档字符串（Docstrings）
+- ✅ 完整的类型提示
+- ✅ 详细的文档字符串
 - ✅ 清晰的代码注释
 - ✅ 统一的代码风格
 - ✅ 完善的错误处理
@@ -261,7 +261,7 @@ pip install akshare pandas pyarrow
 
 ## 总结
 
-已成功完成 AkShare skill 的完整 Python 代码实现，包括：
+已成功完成 AkShare 技能的完整 Python 代码实现，包括：
 
 1. ✅ 创建了 `scripts/akshare_tool.py` 作为主要工具文件
 2. ✅ 实现了所有要求的功能模块

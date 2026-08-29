@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-AkShare Financial Data Tool
+AkShare 金融数据工具
 获取中国金融市场数据的命令行工具
 
 功能：
@@ -40,7 +40,7 @@ class CacheManager:
         """
         初始化缓存管理器
         
-        Args:
+        参数：
             cache_dir: 缓存目录路径
             cache_expiry_hours: 缓存过期时间（小时）
         """
@@ -63,12 +63,12 @@ class CacheManager:
         """
         从缓存获取数据
         
-        Args:
+        参数：
             func_name: 函数名
             **kwargs: 函数参数
             
-        Returns:
-            缓存的DataFrame，如果不存在或已过期则返回None
+        返回值：
+            缓存的 DataFrame；如果不存在或已过期则返回 None
         """
         cache_key = self._get_cache_key(func_name, **kwargs)
         cache_file = self.cache_dir / f"{cache_key}.parquet"
@@ -94,12 +94,12 @@ class CacheManager:
         """
         保存数据到缓存
         
-        Args:
+        参数：
             func_name: 函数名
             data: 要缓存的数据
             **kwargs: 函数参数
             
-        Returns:
+        返回值：
             是否成功保存
         """
         cache_key = self._get_cache_key(func_name, **kwargs)
@@ -116,7 +116,7 @@ class CacheManager:
         """
         清除所有缓存
         
-        Returns:
+        返回值：
             删除的缓存文件数量
         """
         count = 0
@@ -130,7 +130,7 @@ def retry_on_failure(max_retries: int = 3, delay: float = 1.0):
     """
     失败重试装饰器
     
-    Args:
+    参数：
         max_retries: 最大重试次数
         delay: 重试延迟（秒）
     """
@@ -159,7 +159,7 @@ class AkShareTool:
         """
         初始化工具
         
-        Args:
+        参数：
             use_cache: 是否使用缓存
             cache_expiry_hours: 缓存过期时间（小时）
         """
@@ -170,14 +170,14 @@ class AkShareTool:
         """
         带缓存的数据获取
         
-        Args:
+        参数：
             func_name: 函数名（用于缓存键）
             fetch_func: 实际获取数据的函数（无参数）
             use_cache: 是否使用缓存（覆盖默认设置）
             **kwargs: 函数参数（仅用于缓存键）
             
-        Returns:
-            DataFrame数据
+        返回值：
+            DataFrame 数据
         """
         should_cache = use_cache if use_cache is not None else self.use_cache
         
@@ -205,13 +205,13 @@ class AkShareTool:
         """
         获取A股实时行情
         
-        Args:
+        参数：
             symbol: 股票代码（可选，为空则获取全部）
             filter_field: 筛选字段（如 '行业', '市场' 等）
             filter_value: 筛选值
             use_cache: 是否使用缓存
             
-        Returns:
+        返回值：
             实时行情数据
         """
         def fetch():
@@ -237,7 +237,7 @@ class AkShareTool:
         """
         获取股票历史数据
         
-        Args:
+        参数：
             symbol: 股票代码（如 "000001"）
             period: 周期（daily/weekly/monthly）
             start_date: 开始日期（格式：YYYYMMDD）
@@ -245,7 +245,7 @@ class AkShareTool:
             adjust: 复权类型（qfq-前复权, hfq-后复权, ""-不复权）
             use_cache: 是否使用缓存
             
-        Returns:
+        返回值：
             历史数据
         """
         # 默认日期范围
@@ -313,7 +313,7 @@ class AkShareTool:
         """
         获取期货实时行情
         
-        Args:
+        参数：
             symbol: 期货代码（可选）
             use_cache: 是否使用缓存
         """
@@ -349,7 +349,7 @@ class AkShareTool:
         """
         获取基金列表
         
-        Args:
+        参数：
             fund_type: 基金类型（可选）
             use_cache: 是否使用缓存
         """
@@ -367,7 +367,7 @@ class AkShareTool:
         """
         获取基金历史数据
         
-        Args:
+        参数：
             fund_code: 基金代码
             indicator: 指标类型（单位净值走势/累计净值走势等）
             use_cache: 是否使用缓存
@@ -408,7 +408,7 @@ class AkShareTool:
         """
         获取指数实时行情
         
-        Args:
+        参数：
             index_type: 指数类型（all/sz/sh）
             use_cache: 是否使用缓存
         """
@@ -455,7 +455,7 @@ class AkShareTool:
 
 
 def print_dataframe(df: pd.DataFrame, max_rows: int = 20, title: str = "数据结果"):
-    """美化打印DataFrame"""
+    """以易读格式打印 DataFrame。"""
     if df is None or df.empty:
         print("没有数据")
         return

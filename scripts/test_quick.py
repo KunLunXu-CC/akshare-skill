@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-AkShare Tool 快速测试
+AkShare 工具快速测试
 只测试基本功能，不进行网络请求
 """
 
@@ -16,8 +16,8 @@ def test_imports():
         import pandas as pd
         from akshare_tool import AkShareTool, CacheManager, retry_on_failure
         print("✓ 所有模块导入成功")
-        print(f"  - AkShare version: {ak.__version__}")
-        print(f"  - Pandas version: {pd.__version__}")
+        print(f"  - AkShare 版本：{ak.__version__}")
+        print(f"  - Pandas 版本：{pd.__version__}")
         return True
     except ImportError as e:
         print(f"✗ 导入失败: {e}")
@@ -125,14 +125,14 @@ def test_retry_decorator():
         # 测试失败情况
         @retry_on_failure(max_retries=2, delay=0.1)
         def fail_func():
-            raise ValueError("Test error")
+            raise ValueError("测试错误")
 
         try:
             fail_func()
             print("✗ 失败函数应该抛出异常")
             return False
         except ValueError as e:
-            if str(e) == "Test error":
+            if str(e) == "测试错误":
                 print("✓ 失败函数正确抛出异常")
             else:
                 print("✗ 失败函数抛出错误的异常")
@@ -245,7 +245,7 @@ def test_api_structure():
 def run_all_tests():
     """运行所有测试"""
     print("="*80)
-    print("AkShare Tool 快速功能测试")
+    print("AkShare 工具快速功能测试")
     print("="*80)
     print("注意: 此测试不进行实际网络请求，仅验证代码结构和基本功能\n")
 

@@ -1,135 +1,137 @@
 ---
 name: akshare
-description: Chinese financial data access using AkShare library. Fetch real-time and historical data for A-shares, Hong Kong stocks, US stocks, futures, funds, and macroeconomic indicators. Use when user requests Chinese market data, stock prices, market analysis, or financial information from Chinese exchanges. Supports stock quotes, historical data, futures market data, fund information, macroeconomic indicators, and real-time market updates.
+description: 使用 AkShare 获取中国金融市场数据，包括 A 股、港股、美股、期货、基金和宏观经济指标的实时与历史数据。当用户查询中国市场行情、股票价格、市场分析或中国交易所金融信息时使用。
 ---
 
-# AkShare - Chinese Financial Data
+# AkShare 中国金融数据
 
-## Overview
+## 概述
 
-AkShare is a free, open-source Python library for accessing Chinese financial market data. This skill provides guidance for fetching data from Chinese exchanges including Shanghai Stock Exchange, Shenzhen Stock Exchange, Hong Kong Exchange, and more.
+AkShare 是一个免费、开源的 Python 金融数据接口库。本技能用于查询上海证券交易所、深圳证券交易所、香港交易所等市场的数据。
 
-## Quick Start
+## 快速开始
 
-Install AkShare:
+安装 AkShare：
+
 ```bash
 pip install akshare
 ```
 
-Basic stock quote:
+获取 A 股实时行情：
+
 ```python
 import akshare as ak
-df = ak.stock_zh_a_spot_em()  # Real-time A-share data
+
+df = ak.stock_zh_a_spot_em()  # A 股实时行情
 ```
 
-## Stock Data
+## 股票数据
 
-### A-Shares (A股)
+### A 股
 
-**Real-time quotes:**
+实时行情：
+
 ```python
-# All A-shares real-time data
+# 全部 A 股实时行情
 df = ak.stock_zh_a_spot_em()
 
-# Single stock real-time quote
+# 单只股票实时行情
 df = ak.stock_zh_a_spot()
 ```
 
-**Historical data:**
+历史行情：
+
 ```python
-# Historical daily data
-df = ak.stock_zh_a_hist(symbol="000001", period="daily", start_date="20240101", end_date="20241231", adjust="qfq")
+# 日线历史行情
+df = ak.stock_zh_a_hist(
+    symbol="000001",
+    period="daily",
+    start_date="20240101",
+    end_date="20241231",
+    adjust="qfq",
+)
 ```
 
-**Stock list:**
+股票列表：
+
 ```python
-# Get all A-share stock list
+# 获取全部 A 股代码和名称
 df = ak.stock_info_a_code_name()
 ```
 
-### Hong Kong Stocks (港股)
+### 港股
 
-**Real-time quotes:**
 ```python
+# 实时行情
 df = ak.stock_hk_spot_em()
-```
 
-**Historical data:**
-```python
+# 历史行情
 df = ak.stock_hk_hist(symbol="00700", period="daily", adjust="qfq")
 ```
 
-### US Stocks (美股)
+### 美股
 
-**Real-time data:**
 ```python
+# 实时行情
 df = ak.stock_us_spot_em()
 ```
 
-## Futures Data (期货)
+## 期货数据
 
-**Real-time futures:**
 ```python
-# Commodity futures
+# 商品期货实时行情
 df = ak.futures_zh_spot()
-```
 
-**Historical futures:**
-```python
+# 期货历史行情
 df = ak.futures_zh_hist_sina(symbol="IF0")
 ```
 
-## Fund Data (基金)
+## 基金数据
 
-**Fund list:**
 ```python
+# 基金列表
 df = ak.fund_open_fund_info_em()
-```
 
-**Fund historical data:**
-```python
+# 基金历史净值
 df = ak.fund_open_fund_info_em(fund="000001", indicator="单位净值走势")
 ```
 
-## Macroeconomic Indicators (宏观)
+## 宏观经济指标
 
-**GDP data:**
 ```python
-df = ak.macro_china_gdp()
+# 国内生产总值
+gdp = ak.macro_china_gdp()
+
+# 居民消费价格指数
+cpi = ak.macro_china_cpi()
+
+# 采购经理指数
+pmi = ak.macro_china_pmi()
 ```
 
-**CPI data:**
-```python
-df = ak.macro_china_cpi()
-```
+## 常用参数
 
-**PMI data:**
-```python
-df = ak.macro_china_pmi()
-```
+周期：
 
-## Common Parameters
+- `daily`：日线
+- `weekly`：周线
+- `monthly`：月线
 
-**Period (周期):**
-- `daily` - 日线
-- `weekly` - 周线
-- `monthly` - 月线
+复权方式：
 
-**Adjustment (复权):**
-- `qfq` - 前复权
-- `hfq` - 后复权
-- `""` - 不复权
+- `qfq`：前复权
+- `hfq`：后复权
+- `""`：不复权
 
-## Tips
+## 使用建议
 
-1. **Data caching**: AkShare doesn't cache data, implement your own caching if needed
-2. **Rate limiting**: Be mindful of request frequency to avoid being blocked
-3. **Data format**: Returns pandas DataFrame, can be easily processed
-4. **Error handling**: Network errors may occur, implement retry logic
+1. AkShare 默认不缓存数据；需要时自行实现缓存。
+2. 控制请求频率，避免触发数据源限流。
+3. 接口通常返回 pandas `DataFrame`，可直接筛选、聚合或导出。
+4. 网络和上游数据源可能不稳定，应按场景增加超时、重试和异常处理。
 
-## References
+## 参考资料
 
-For complete API documentation and advanced usage, see:
-- [references/akshare_api.md](references/akshare_api.md) - Detailed API reference
-- [references/common_functions.md](references/common_functions.md) - Commonly used functions
-- [https://akshare.akfamily.xyz/](https://akshare.akfamily.xyz/) - Official documentation
+- [AkShare API 参考](references/akshare_api.md)：详细接口说明
+- [常用函数](references/common_functions.md)：高频函数和常见模式
+- [AkShare 官方文档](https://akshare.akfamily.xyz/)
