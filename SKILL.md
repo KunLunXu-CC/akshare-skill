@@ -1,6 +1,7 @@
 ---
-name: akshare
-description: 安装并验证 AkShare Python 库。当用户需要准备 AkShare 运行环境、安装依赖或检查 AkShare 是否可用时使用；当前不提供金融数据查询和分析能力。
+name: akshare-skill
+description: |
+  安装并验证 AkShare Python 库。当用户需要准备 AkShare 运行环境、安装依赖或检查 AkShare 是否可用时使用；当前不提供金融数据查询和分析能力。
 ---
 
 # AkShare 安装工具
