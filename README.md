@@ -8,7 +8,7 @@
 bash scripts/install_akshare.sh
 ```
 
-脚本会检查 Python 和 pip、安装 AkShare，并输出已安装的版本号。
+脚本会先检查 Python 和 AkShare。AkShare 已安装时直接输出版本号；未安装时再检查 pip、执行安装并验证导入。
 
 ## 当前范围
 

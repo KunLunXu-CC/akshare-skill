@@ -19,9 +19,9 @@ bash scripts/install_akshare.sh
 安装脚本会：
 
 1. 检查 `python3` 是否可用。
-2. 检查 Python 的 pip 模块是否可用。
-3. 安装 AkShare。
-4. 导入 AkShare 并输出版本号，确认安装成功。
+2. 检查 AkShare 是否已经安装；已安装时输出版本号并跳过安装。
+3. 未安装时检查 Python 的 pip 模块是否可用。
+4. 安装 AkShare，并在完成后导入 AkShare 验证版本。
 
 安装 Python 包会修改当前 Python 环境。执行前应确认用户允许在目标环境中安装依赖。
 
