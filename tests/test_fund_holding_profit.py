@@ -66,6 +66,19 @@ class FundHoldingProfitTest(unittest.TestCase):
         record = FUND_HOLDING.resolve_fund(self.records, "示例成长混合C")
         self.assertEqual(record["基金代码"], "000002")
 
+    def test_名称匹配忽略币种修饰和全半角(self):
+        records = [
+            {
+                "基金代码": "270023",
+                "基金简称": "广发全球精选股票(QDII)人民币A",
+            }
+        ]
+        record = FUND_HOLDING.resolve_fund(
+            records, "广发全球精选股票（QDII）A"
+        )
+
+        self.assertEqual(record["基金代码"], "270023")
+
     def test_名称不唯一时要求使用代码(self):
         records = self.records + [
             {"基金代码": "000003", "基金简称": "示例成长混合B"}

@@ -11,6 +11,7 @@ import os
 import re
 import shlex
 import sys
+import unicodedata
 from dataclasses import asdict, dataclass, replace
 from datetime import datetime, time
 from pathlib import Path
@@ -28,7 +29,7 @@ def find_skill_venv_python(skill_root: Path | None = None) -> Path | None:
     return next((path for path in candidates if path.is_file()), None)
 
 
-def reuse_skill_venv_if_needed() -> None:
+def reuse_skill_venv_if_needed(script_path: Path | None = None) -> None:
     """当前解释器缺少 AkShare 时，自动切换到技能虚拟环境。"""
     if importlib.util.find_spec("akshare") is not None:
         return
@@ -41,10 +42,10 @@ def reuse_skill_venv_if_needed() -> None:
     if current_python == venv_python.absolute():
         return
 
-    script_path = Path(__file__).resolve()
+    target_script = script_path or Path(__file__).resolve()
     os.execv(
         str(venv_python),
-        [str(venv_python), str(script_path), *sys.argv[1:]],
+        [str(venv_python), str(target_script), *sys.argv[1:]],
     )
 
 
@@ -128,6 +129,14 @@ def normalize_identifier(identifier: str) -> str:
     return value
 
 
+def normalize_fund_name_for_match(value: Any) -> str:
+    """规范基金名称中常见的全半角、标点和币种修饰。"""
+    text = unicodedata.normalize("NFKC", str(value)).casefold()
+    for token in ("人民币", "美元现汇", "美元现钞"):
+        text = text.replace(token, "")
+    return re.sub(r"[\W_]+", "", text)
+
+
 def parse_holding_spec(value: str) -> HoldingInput:
     """解析“基金,成本价,份额”格式的批量持仓参数。"""
     parts = [part.strip() for part in value.replace("，", ",").rsplit(",", 2)]
@@ -160,6 +169,15 @@ def resolve_fund(records: Iterable[dict[str, Any]], identifier: str) -> dict[str
     partial_matches = [
         row for row in rows if query.casefold() in str(row.get("基金简称", "")).strip().casefold()
     ]
+    if not partial_matches:
+        normalized_query = normalize_fund_name_for_match(query)
+        partial_matches = [
+            row
+            for row in rows
+            if normalized_query
+            and normalized_query
+            in normalize_fund_name_for_match(row.get("基金简称", ""))
+        ]
     if len(partial_matches) == 1:
         return partial_matches[0]
     if len(partial_matches) > 1:
