@@ -1,7 +1,6 @@
 ---
 name: akshare-skill
-description: ｜
-  使用 AkShare 获取和处理金融数据，也用于安装或验证运行环境。当前支持开放式基金持仓收益查询，后续能力按独立模块扩展。
+description: 使用 AkShare 获取和处理金融数据。当前支持从支付宝等截图记录基金持仓、从记忆读取持仓并查询收益，也用于安装或验证运行环境。
 ---
 
 # AkShare
@@ -10,6 +9,7 @@ description: ｜
 
 | 能力 | 用途 | 入口 |
 | --- | --- | --- |
+| 基金持仓记录 | 从截图或文字提取持仓，输出表格并在可用时更新记忆 | [使用说明](references/fund_holding_record.md) |
 | 基金持仓收益 | 查询单只或多只基金的收益、收益率和当日收益 | [使用说明](references/fund_holding_profit.md) |
 | 环境准备 | 安装或验证 AkShare | `bash scripts/install_akshare.sh` |
 

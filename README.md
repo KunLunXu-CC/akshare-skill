@@ -10,9 +10,17 @@ bash scripts/install_akshare.sh
 
 脚本优先复用已有 AkShare；缺失时安装到 `.venv`。
 
-## 查询
+## 能力
 
-当前支持基金持仓收益：
+- 从截图或文字记录基金持仓，并在平台支持时更新记忆。
+- 从输入或记忆读取持仓，查询基金收益。
+
+```bash
+python3 scripts/fund_holding_profit.py \
+  --holding "270023,4.5071,11778.31"
+```
+
+批量查询：
 
 ```bash
 python3 scripts/fund_holding_profit.py \
