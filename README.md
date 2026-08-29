@@ -1,6 +1,6 @@
 # AkShare 技能
 
-这是一个最小化的 AkShare 安装技能。目前只保留 AkShare 的安装与导入验证逻辑，其他能力将在实际需要时逐步增加。
+这是一个逐步扩展的 AkShare 技能。目前支持安装 AkShare，以及根据基金最新净值、持仓成本价和份额查询持仓收益。
 
 ## 使用方法
 
@@ -12,8 +12,19 @@ bash scripts/install_akshare.sh
 
 ## 当前范围
 
-- 保留：AkShare 安装和导入验证。
-- 暂不包含：数据查询、缓存、命令行查询工具、数据分析、示例和测试。
+- AkShare 安装和导入验证。
+- 按开放式基金代码或名称查询最新净值。
+- 根据每份持仓成本价和持有份额计算持有成本、当前市值、持仓收益、收益率和当日收益。
+
+## 基金查询
+
+```bash
+python3 scripts/fund_holding_profit.py 270023 \
+  --cost-price 4.5071 \
+  --shares 11778.31
+```
+
+详细口径见 [基金持仓收益参考](references/fund_holding_profit.md)。
 
 技能入口见 [SKILL.md](SKILL.md)，开发语言规范见 [Agent.md](Agent.md)。
 
